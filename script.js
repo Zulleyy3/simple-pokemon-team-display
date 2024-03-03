@@ -1,7 +1,6 @@
 "use strict"
 
-let pictures_all = import.meta.glob("./public/**/*.png", {import: "default"});
-pictures_all = Object.keys(pictures_all);
+let pictures_all = import.meta.glob("./images/**/*.png", );
 
 
 import pokemon from "./pkmn_alternative.json";
@@ -48,13 +47,14 @@ function previewImage(pokemonName) {
   preview_area.replaceChildren();
   lastPreview = id;
   let id_pad = id.toString().padStart(4, "0");
-  let url;
-  for (const picture_path of Object.values(pictures_all)) {
+  for (const picture_path in pictures_all) {
     // console.log(picture_path)
     if (picture_path.includes(id_pad)) {
       // strip ./public
-      url = picture_path.slice(8);
-      createPreviewImg(url);
+      pictures_all[picture_path]().then((url) => {
+        // get static asset
+        createPreviewImg(url.default);
+      });
     }
   }
 }
