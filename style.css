@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  background: green;
+  min-height: min-content;
+  /* overflow: auto; */
+}
+body {
+  height: 97vh;
+}
+
+.slot {
+  flex: 1 0 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  height: calc(100% / 3 );
+}
+
+.slot input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: auto;
+  background: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 10%;
+}
+.slot img {
+
+  display: block;
+  height: 90%;
+  /* width: 90%; */
+}
