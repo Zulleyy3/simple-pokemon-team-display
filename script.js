@@ -1,16 +1,15 @@
 "use strict"
 
-const pictures_female = import.meta.glob("./images/Gen5/female/*.png",{query: "?url"});
-console.log(pictures_female);
-const pictures_all = import.meta.glob("./images/Gen5/*.png");
+let pictures_all = import.meta.glob("./public/Gen5/**/*.png", {import: "default", eager: true, query:"?url"});
 console.log(pictures_all);
+pictures_all = Object.keys(pictures_all);
+
 
 import pokemon from "./pkmn_alternative.json";
 let slots = document.querySelectorAll(".slot");
 let favDialog = document.querySelector("#favDialog");
 let dialogform = favDialog.querySelector("form");
 const pokemon_input = favDialog.querySelector("#pokemon_input");
-const confirmBtn = favDialog.querySelector("#confirmBtn");
 const previewBtn = favDialog.querySelector("#previewBtn");
 const preview_area = favDialog.querySelector("#preview_area");
 
@@ -35,18 +34,6 @@ function callReplaceDialog() {
   favDialog.showModal();
 }
 
-
-// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
-confirmBtn.addEventListener("click", (event) => {
-  event.preventDefault(); // We don't want to submit this fake form
-  // favDialog.close(selectEl.value); // Have to send the select box value here.
- modifiedImg.src = findImage(pokemon_input.value, gender.value);
- 
-  console.log(gender.value);
-  console.log(pokemon_input.value);
-  favDialog.close();
-});
-
 previewBtn.addEventListener("click", (event) => {
   event.preventDefault(); // We don't want to submit this fake form
   // favDialog.close(selectEl.value); // Have to send the select box value here.
@@ -58,19 +45,17 @@ function previewImage(pokemonName) {
   let id = pokemon[pokemonName];
   let id_pad = id.toString().padStart(4, "0");
   let url;
-  let path = `./images/Gen5/female/${id_pad}.png`;
-  let picture = pictures_female[path];
-  if (picture) {
-      url =  new URL(`./images/Gen5/female/${id_pad}.png`, import.meta.url).href;
-      createPreviewImg(url);
-  }
-  // path = `./images/Gen5/${id_pad}.png`;
-  picture = pictures_all[path];
-  for (const picture_path of Object.keys(pictures_all)) {
-    console.log(picture_path)
+  // let path = `/public/Gen5/female/${id_pad}.png`;
+  // if (pictures_female.includes(path)) {
+  //     url =  `/Gen5/female/${id_pad}.png`;
+  //     createPreviewImg(url);
+  // }
+  // path = `./public/Gen5/${id_pad}.png`;
+  for (const picture_path of Object.values(pictures_all)) {
+    // console.log(picture_path)
     if (picture_path.includes(id_pad)) {
-      const last = picture_path.split('/').at(-1);
-      url =  new URL(`./images/Gen5/${last}`, import.meta.url).href;
+      // strip ./public
+      url = picture_path.slice(8);
       createPreviewImg(url);
     }
   }
@@ -90,27 +75,6 @@ function updateImage() {
   modifiedImg.src = this.src;
   favDialog.close();
   preview_area.replaceChildren();
-}
-
-function findImage(pokemonName, gender) {
-  let id = pokemon[pokemonName];
-  let url;
-  if (gender === "Female") {
-    let path = `./images/Gen5/female/${id.toString().padStart(4,"0")}.png`;
-    const picture = pictures_female[path];
-    if (picture) {
-      url =  new URL(`./images/Gen5/female/${id.toString().padStart(4,"0")}.png`, import.meta.url).href;
-      return url;
-    }
-  }
-  let path = `./images/Gen5/${id.toString().padStart(4,"0")}.png`;
-  const picture = pictures_all[path];
-	console.log(path);
-  if (picture) {
-    url =  new URL(`./images/Gen5/${id.toString().padStart(4,"0")}.png`, import.meta.url).href;
-    return url;
-  }
-  return new URL(`./images/.png`, import.meta.url).href;
 }
 
 for (const slot of slots) {
