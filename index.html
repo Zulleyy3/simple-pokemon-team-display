@@ -14,12 +14,12 @@
 <body>
   <dialog id="favDialog">
     <form>
-      <button value="cancel" formmethod="dialog">Cancel</button>
       <p>
         <label>
           Name
-          <input type="text" list="pokemonlist" name="pokemon_select" id="pokemon_input">
-          <button id="previewBtn" value="default">Preview</button>
+          <input type="text" autofocus list="pokemonlist" name="pokemon_select" id="pokemon_input">
+          <button value="cancel" type="button" formmethod="dialog">Cancel</button>
+          <button type="submit" id="previewBtn">Preview</button>
         </label>
       </p>
       <div id="preview_area">

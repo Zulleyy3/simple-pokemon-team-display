@@ -1,7 +1,6 @@
 "use strict"
 
-let pictures_all = import.meta.glob("./public/Gen5/**/*.png", {import: "default", eager: true, query:"?url"});
-console.log(pictures_all);
+let pictures_all = import.meta.glob("./public/**/*.png", {import: "default"});
 pictures_all = Object.keys(pictures_all);
 
 
@@ -27,6 +26,7 @@ function populate_pokemonlist(pokemonlist, form) {
 populate_pokemonlist(pokemon, dialogform);
 
 let modifiedImg = undefined;
+let lastPreview = undefined;
 
 function callReplaceDialog() {
   console.log(this);
@@ -36,21 +36,19 @@ function callReplaceDialog() {
 
 previewBtn.addEventListener("click", (event) => {
   event.preventDefault(); // We don't want to submit this fake form
-  // favDialog.close(selectEl.value); // Have to send the select box value here.
   previewImage(pokemon_input.value);
 });
 
 function previewImage(pokemonName) {
-  preview_area.replaceChildren();
   let id = pokemon[pokemonName];
+  if (lastPreview === id) {
+    return;
+  }
+
+  preview_area.replaceChildren();
+  lastPreview = id;
   let id_pad = id.toString().padStart(4, "0");
   let url;
-  // let path = `/public/Gen5/female/${id_pad}.png`;
-  // if (pictures_female.includes(path)) {
-  //     url =  `/Gen5/female/${id_pad}.png`;
-  //     createPreviewImg(url);
-  // }
-  // path = `./public/Gen5/${id_pad}.png`;
   for (const picture_path of Object.values(pictures_all)) {
     // console.log(picture_path)
     if (picture_path.includes(id_pad)) {
@@ -74,7 +72,6 @@ function updateImage() {
   input.value = pokemon_input.value;
   modifiedImg.src = this.src;
   favDialog.close();
-  preview_area.replaceChildren();
 }
 
 for (const slot of slots) {
