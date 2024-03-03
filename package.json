@@ -1,8 +1,8 @@
 {
-  "name": "simple-pokemon-display",
+  "name": "simple-pokemon-team-display",
   "version": "0.1.0",
   "private": true,
-  "description": "a simple stream display for pokemon using dialoge input",
+  "description": "a simple stream display for pokemon teams with images pulled up by searching a pokemon name",
   "main": "index.js",
   "scripts": {
     "dev": "vite",

@@ -1,9 +1,9 @@
 "use strict"
 
-let pictures_all = import.meta.glob("./images/**/*.png", );
+let pictures_all = import.meta.glob("./images/**/*.{?(a)png,jp?(e)g,gif}", );
 
+import pokemon from "./pokemon.json";
 
-import pokemon from "./pkmn_alternative.json";
 let slots = document.querySelectorAll(".slot");
 let favDialog = document.querySelector("#favDialog");
 let dialogform = favDialog.querySelector("form");
