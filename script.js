@@ -22,6 +22,7 @@ function populate_pokemonlist(pokemonlist, form) {
     form.appendChild(datalist);
 }
 
+
 populate_pokemonlist(pokemon, dialogform);
 
 let modifiedImg = undefined;
@@ -32,6 +33,27 @@ function callReplaceDialog() {
   modifiedImg = this;
   favDialog.showModal();
 }
+
+function handleNicknameChange() {
+  let slot = this.parentNode;
+  let img = slot.querySelector("img");
+  writeSlotState(slot, this, img);
+}
+
+for (const slot of slots) {
+  let img = slot.querySelector("img");
+  img.addEventListener("click", callReplaceDialog);
+  
+  let input = slot.querySelector("input");
+  input.addEventListener("change", handleNicknameChange);
+
+  let config = JSON.parse(localStorage.getItem(slot.id));
+  if (config) {
+    input.value = config.nickname;
+    img.src = config.imgsrc;
+  }
+}
+
 
 previewBtn.addEventListener("click", (event) => {
   event.preventDefault(); // We don't want to submit this fake form
@@ -71,9 +93,16 @@ function updateImage() {
   let input = slot.querySelector("input");
   input.value = pokemon_input.value;
   modifiedImg.src = this.src;
+  writeSlotState(slot, input, modifiedImg);
   favDialog.close();
 }
 
-for (const slot of slots) {
-  slot.querySelector("img").addEventListener("click", callReplaceDialog);
+function writeSlotState(slot, input, img) {
+  localStorage.setItem(slot.id,
+    `{ 
+      "nickname": "${input.value}",
+      "imgsrc": "${img.src}"
+     }`
+  );
 }
+

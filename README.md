@@ -21,7 +21,7 @@ Then select the image to show.
 This will show the image in the team preview and set the name above the image to the name of the Pokemon.
 
 ## Limitations
-- Not yet saving the state between browser sessions
+- Saving the state between browser session implemented, but UX might use work.
 - CSS is not good yet
 - Loads all the images as JS modules after build (it's not terrible, but I am not a fan)
 - The Browser Source in OBS doesn't have the default Suggestion under inputboxes so the autosuggestion doesn't work in it.
