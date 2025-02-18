@@ -12,9 +12,9 @@
   "author": "ZLL",
   "license": "MIT",
   "dependencies": {
-    "vite": "^5.0.10"
+    "vite": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.56.0"
+    "eslint": "^9.20.1"
   }
 }

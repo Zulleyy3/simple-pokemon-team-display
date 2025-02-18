@@ -29,6 +29,7 @@ let modifiedImg = undefined;
 let lastPreview = undefined;
 
 function callReplaceDialog() {
+  // event.preventDefault(
   console.log(this);
   modifiedImg = this;
   favDialog.showModal();
@@ -41,10 +42,10 @@ function handleNicknameChange() {
 }
 
 for (const slot of slots) {
-  let img = slot.querySelector("img");
+  let img = slot.querySelector(".slot_image");
   img.addEventListener("click", callReplaceDialog);
-  
-  let input = slot.querySelector("input");
+
+  let input = slot.querySelector(".slot_input");
   input.addEventListener("change", handleNicknameChange);
 
   let config = JSON.parse(localStorage.getItem(slot.id));
@@ -82,10 +83,11 @@ function previewImage(pokemonName) {
 }
 
 function createPreviewImg(url) {
-  let img = document.createElement("img");
-  img.src = url;
-  img.addEventListener("click", updateImage);
-  preview_area.appendChild(img);
+  let img_input = document.createElement("input")
+  img_input.type = "image"
+  img_input.src = url
+  img_input.addEventListener("click", updateImage);
+  preview_area.appendChild(img_input)
 }
 
 function updateImage() {
@@ -99,7 +101,7 @@ function updateImage() {
 
 function writeSlotState(slot, input, img) {
   localStorage.setItem(slot.id,
-    `{ 
+    `{
       "nickname": "${input.value}",
       "imgsrc": "${img.src}"
      }`

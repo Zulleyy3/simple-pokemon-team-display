@@ -32,7 +32,7 @@ body {
   height: calc(100% / 3 );
 }
 
-.slot input {
+.slot .input_text {
   border: none;
   display: inline;
   font-family: inherit;
@@ -45,7 +45,7 @@ body {
   width: 100%;
   height: 10%;
 }
-.slot img {
+.slot .input_image {
 
   display: block;
   height: 90%;
