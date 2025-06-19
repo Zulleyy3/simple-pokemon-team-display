@@ -3,7 +3,7 @@ A simple Pokémon team display built with Javascript and Vite, where images can 
 
 ## Installation
 Install dependencies with e.g. `pnpm install`.
-Put tagged images of the Pokémon in the images directory. 
+Put tagged images of the Pokémon in the images directory.
 Finally, after adding the images, build with `pnpm run build` and copy the dist folder to your webserver.
 
 ## Image Tag Detection
@@ -25,3 +25,6 @@ This will show the image in the team preview and set the name above the image to
 - CSS is not good yet
 - Loads all the images as JS modules after build (it's not terrible, but I am not a fan)
 - The Browser Source in OBS doesn't have the default Suggestion under inputboxes so the autosuggestion doesn't work in it.
+
+## Notes
+The sprites were sourced from [PokeAPI](https://github.com/PokeAPI/sprites)
